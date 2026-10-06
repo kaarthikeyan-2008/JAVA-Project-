@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>InternConnect - Internship Recommendation Portal</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#eef4f9;
+    color:#1f2937;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#0b3b68,#145b91);
+    color:white;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+header h1{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+header p{
+    font-size:14px;
+    opacity:.9;
+}
+
+/* CONTAINER */
+
+.container{
+    width:95%;
+    max-width:1150px;
+    margin:30px auto;
+}
+
+/* CARDS */
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#0b3b68;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#64748b;
+    margin-bottom:20px;
+}
+
+/* LOGIN */
+
+.login-card{
+    max-width:450px;
+    margin:60px auto;
+}
+
+.logo{
+    width:75px;
+    height:75px;
+    margin:auto;
+    border-radius:50%;
+    background:#0b3b68;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* FORM */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-weight:600;
+    margin-bottom:7px;
+    color:#334155;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    border-color:#145b91;
+    box-shadow:0 0 0 3px rgba(20,91,145,.12);
+}
+
+/* BUTTONS */
+
+button{
+    border:none;
+    border-radius:8px;
+    padding:12px 20px;
+    font-size:15px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.primary{
+    background:#0b3b68;
+    color:white;
+}
+
+.primary:hover{
+    background:#145b91;
+}
+
+.secondary{
+    background:#e2e8f0;
+    color:#1e293b;
+}
+
+.danger{
+    background:#dc2626;
+    color:white;
+}
+
+.full-button{
+    width:100%;
+    margin-top:20px;
+}
+
+/* NAV */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+}
+
+/* MESSAGE */
+
+.message{
+    margin-top:12px;
+    color:#dc2626;
+    min-height:20px;
+    font-size:14px;
+}
+
+.success{
+    color:#15803d;
+}
+
+/* DASHBOARD */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    background:#f1f5f9;
+}
+
+.stat h3{
+    font-size:28px;
+    color:#0b3b68;
+}
+
+.stat p{
+    color:#64748b;
+}
+
+/* TABLE */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th,
+td{
+    padding:13px;
+    text-align:left;
+    border-bottom:1px solid #e2e8f0;
+}
+
+th{
+    background:#0b3b68;
+    color:white;
+    position:sticky;
+    top:0;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+tr:hover{
+    background:#eef6ff;
+}
+
+/* BADGES */
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.paid{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.unpaid{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.match{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+/* SECTIONS */
+
+.section-title{
+    margin-top:25px;
+    margin-bottom:10px;
+    color:#0b3b68;
+}
+
+.hidden{
+    display:none;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:22px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .navbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .nav-buttons{
+        justify-content:center;
+    }
+
+    .card{
+        padding:20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>INTERCONNECT</h1>
+    <p>Internship Recommendation Portal Using Java</p>
+</header>
+
+
+<!-- ================= LOGIN PAGE ================= -->
+
+<section id="loginPage" class="container">
+
+    <div class="card login-card">
+
+        <div class="logo">IC</div>
+
+        <h2 style="text-align:center;">
+            Student Login
+        </h2>
+
+        <p class="subtitle" style="text-align:center;">
+            Find internships that match your profile
+        </p>
+
+        <div class="form-group">
+
+            <label>
+                Register Number
+            </label>
+
+            <input
+                type="text"
+                id="loginRegister"
+                placeholder="Enter register number"
+            >
+
+        </div>
+
+
+        <div class="form-group" style="margin-top:15px;">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+            >
+
+        </div>
+
+
+        <button
+            class="primary full-button"
+            onclick="login()"
+        >
+            Login
+        </button>
+
+        <p id="loginMessage" class="message"></p>
+
+
+        <div style="
+            margin-top:20px;
+            padding:12px;
+            background:#f1f5f9;
+            border-radius:8px;
+            font-size:13px;
+        ">
+
+            <b>Demo Login</b><br><br>
+
+            Register Number:
+            <b>2104251040384</b><br>
+
+            Password:
+            <b>intern@123</b>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PROFILE PAGE ================= -->
+
+<section id="profilePage" class="container hidden">
+
+    <div class="card">
+
+        <div class="navbar">
+
+            <div>
+                <h2>Student Profile</h2>
+                <p id="welcome" class="subtitle"></p>
+            </div>
+
+            <div class="nav-buttons">
+
+                <button
+                    class="danger"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>
+                    Register Number
+                </label>
+
+                <input
+                    id="registerNumber"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Department
+                </label>
+
+                <select id="department">
+
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="AIDS">AIDS</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="MECH">MECH</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Studying Year
+                </label>
+
+                <select id="year">
+
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    CGPA
+                </label>
+
+                <input
+                    id="cgpa"
+                    type="number"
+                    min="0"
+                    max="10"
+                    step="0.01"
+                    placeholder="Example: 8.5"
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Skills / Interests
+                </label>
+
+                <input
+                    id="skills"
+                    placeholder="Java, Python, SQL, HTML, CSS"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Preferred Location
+                </label>
+
+                <select id="location">
+
+                    <option value="Any">Any</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Remote">Remote</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Paid / Unpaid
+                </label>
+
+                <select id="paid">
+
+                    <option value="Any">Any</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Interested Domain
+                </label>
+
+                <select id="domain">
+
+                    <option value="Any">Any</option>
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Backend Development">
+                        Backend Development
+                    </option>
+
+                    <option value="Data Science">
+                        Data Science
+                    </option>
+
+                    <option value="Machine Learning">
+                        Machine Learning
+                    </option>
+
+                    <option value="Cyber Security">
+                        Cyber Security
+                    </option>
+
+                    <option value="Cloud Computing">
+                        Cloud Computing
+                    </option>
+
+                    <option value="Embedded Systems">
+                        Embedded Systems
+                    </option>
+
+                    <option value="Mobile App Development">
+                        Mobile App Development
+                    </option>
+
+                    <option value="Software Testing">
+                        Software Testing
+                    </option>
+
+                    <option value="Data Analytics">
+                        Data Analytics
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <p id="profileMessage" class="message"></p>
+
+
+        <button
+            class="primary full-button"
+            onclick="findInternships()"
+        >
+            🔍 Find Internship Recommendations
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= RESULT PAGE ================= -->
+
+<section id="resultPage" class="container hidden">
+
+    <div class="card">
+
+        <div class="navbar">
+
+            <div>
+
+                <h2>
+                    Internship Recommendations
+                </h2>
+
+                <p
+                    id="resultSummary"
+                    class="subtitle"
+                ></p>
+
+            </div>
+
+            <div class="nav-buttons">
+
+                <button
+                    class="secondary"
+                    onclick="backToProfile()"
+                >
+                    Edit Profile
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <h3 id="totalCount">
+                    0
+                </h3>
+
+                <p>
+                    Internships Checked
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3 id="eligibleCount">
+                    0
+                </h3>
+
+                <p>
+                    Eligible
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3 id="notEligibleCount">
+                    0
+                </h3>
+
+                <p>
+                    Not Eligible
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ELIGIBLE -->
+
+        <h2 class="section-title">
+            ✅ Eligible Internships
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                        <th>Payment</th>
+                        <th>Domain</th>
+                        <th>Skill Match</th>
+                        <th>Benefits</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="eligibleTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- NOT ELIGIBLE -->
+
+        <h2 class="section-title">
+            ❌ Not Eligible Internships
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                        <th>Reason</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="notEligibleTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <b>InternConnect</b> –
+    Internship Recommendation Portal
+
+    <br>
+
+    Chennai Institute of Technology |
+    Department of Computer Science and Engineering
+
+    <br><br>
+
+    Project Team:
+    SURENDHAR V & KAARTHIKEYAN S
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   STUDENT DATA
+========================================================= */
+
+const students = [
+
+    {
+        registerNumber:"2104251040384",
+        fullName:"KAARTHIKEYAN S",
+        password:"intern@123"
+    },
+
+    {
+        registerNumber:"2104251041004",
+        fullName:"SURENDHAR V",
+        password:"intern@123"
+    }
+
+];
+
+
+/* =========================================================
+   INTERNSHIP DATA
+========================================================= */
+
+const internships = [
+
+{
+company:"Hexabyte Systems",
+role:"Java Developer Intern",
+department:"CSE,IT,AIDS",
+year:2,
+skills:"Java,Spring Boot,MySQL",
+location:"Chennai",
+paid:"Paid",
+cgpa:7,
+domain:"Backend Development",
+benefits:"Stipend and pre-placement offer chance"
+},
+
+{
+company:"Mindforge Systems",
+role:"API Development Intern",
+department:"CSE,IT",
+year:2,
+skills:"Java,Spring Boot,REST API",
+location:"Remote",
+paid:"Paid",
+cgpa:7,
+domain:"Backend Development",
+benefits:"Stipend, certificate and laptop access"
+},
+
+{
+company:"Datasprint Labs",
+role:"Data Science Intern",
+department:"CSE,IT,AIDS",
+year:3,
+skills:"Python,SQL,Pandas",
+location:"Hyderabad",
+paid:"Paid",
+cgpa:8,
+domain:"Data Science",
+benefits:"Monthly stipend and certificate"
+},
+
+{
+company:"Cloudnest Solutions",
+role:"ML Engineer Intern",
+department:"CSE,AIDS",
+year:3,
+skills:"Python,Machine Learning,Deep Learning",
+location:"Remote",
+paid:"Unpaid",
+cgpa:6.5,
+domain:"Machine Learning",
+benefits:"Certificate and project experience"
+},
+
+{
+company:"Byteforge Software",
+role:"Security Analyst Intern",
+department:"CSE,IT,ECE",
+year:3,
+skills:"Networking,Linux,Python",
+location:"Hyderabad",
+paid:"Paid",
+cgpa:6,
+domain:"Cyber Security",
+benefits:"Stipend and pre-placement offer chance"
+},
+
+{
+company:"Vertexa Technologies",
+role:"Cloud Support Intern",
+department:"CSE,IT,ECE",
+year:3,
+skills:"AWS,Linux,Java",
+location:"Remote",
+paid:"Paid",
+cgpa:8.5,
+domain:"Cloud Computing",
+benefits:"Stipend, certificate and laptop access"
+},
+
+{
+company:"Novacore Systems",
+role:"Embedded Firmware Intern",
+department:"ECE,EEE",
+year:2,
+skills:"C,Embedded C,IoT",
+location:"Hyderabad",
+paid:"Unpaid",
+cgpa:7,
+domain:"Embedded Systems",
+benefits:"Certificate and project experience"
+},
+
+{
+company:"Pulsetech Labs",
+role:"Android Developer Intern",
+department:"CSE,IT,AIDS",
+year:2,
+skills:"Kotlin,Flutter,Java",
+location:"Remote",
+paid:"Paid",
+cgpa:7.5,
+domain:"Mobile App Development",
+benefits:"Stipend, certificate and mentorship"
+},
+
+{
+company:"Gridlock Solutions",
+role:"QA Intern",
+department:"CSE,IT,AIDS,ECE",
+year:4,
+skills:"Selenium,Java,SQL",
+location:"Hyderabad",
+paid:"Paid",
+cgpa:0,
+domain:"Software Testing",
+benefits:"Stipend and pre-placement offer chance"
+},
+
+{
+company:"Stackwise Software",
+role:"Business Analyst Intern",
+department:"ANY",
+year:4,
+skills:"Excel,SQL,Python",
+location:"Remote",
+paid:"Unpaid",
+cgpa:7.5,
+domain:"Data Analytics",
+benefits:"Certificate and project experience"
+},
+
+{
+company:"Cirrusoft Technologies",
+role:"Front-End Intern",
+department:"CSE,IT",
+year:2,
+skills:"HTML,CSS,JavaScript",
+location:"Coimbatore",
+paid:"Paid",
+cgpa:0,
+domain:"Web Development",
+benefits:"Stipend, certificate and mentorship"
+},
+
+{
+company:"Logicrest Labs",
+role:"Data Scientist Trainee",
+department:"ANY",
+year:3,
+skills:"Python,SQL,Statistics",
+location:"Coimbatore",
+paid:"Unpaid",
+cgpa:8,
+domain:"Data Science",
+benefits:"Certificate and recommendation letter"
+},
+
+{
+company:"Meshwork Solutions",
+role:"AI Research Intern",
+department:"CSE,IT,AIDS",
+year:3,
+skills:"Python,Machine Learning,TensorFlow",
+location:"Chennai",
+paid:"Paid",
+cgpa:6.5,
+domain:"Machine Learning",
+benefits:"Monthly stipend and certificate"
+},
+
+{
+company:"Nimbusys Software",
+role:"SOC Intern",
+department:"CSE,IT",
+year:3,
+skills:"Networking,Linux,Ethical Hacking",
+location:"Coimbatore",
+paid:"Paid",
+cgpa:6,
+domain:"Cyber Security",
+benefits:"Stipend, certificate and mentorship"
+},
+
+{
+company:"Opticore Technologies",
+role:"DevOps Intern",
+department:"ANY",
+year:3,
+skills:"AWS,Linux,Docker",
+location:"Chennai",
+paid:"Unpaid",
+cgpa:8.5,
+domain:"Cloud Computing",
+benefits:"Certificate and recommendation letter"
+},
+
+{
+company:"Pathwave Systems",
+role:"IoT Developer Intern",
+department:"ECE,EEE,MECH",
+year:2,
+skills:"C,Embedded C,Microcontrollers",
+location:"Coimbatore",
+paid:"Paid",
+cgpa:7,
+domain:"Embedded Systems",
+benefits:"Stipend, certificate and laptop access"
+},
+
+{
+company:"Quillsoft Labs",
+role:"Flutter Intern",
+department:"CSE,IT",
+year:2,
+skills:"Kotlin,Flutter,Android",
+location:"Chennai",
+paid:"Paid",
+cgpa:7.5,
+domain:"Mobile App Development",
+benefits:"Monthly stipend and certificate"
+},
+
+{
+company:"Rivetech Solutions",
+role:"Automation Test Intern",
+department:"ANY",
+year:4,
+skills:"Selenium,Java,Test Automation",
+location:"Coimbatore",
+paid:"Unpaid",
+cgpa:0,
+domain:"Software Testing",
+benefits:"Certificate and recommendation letter"
+},
+
+{
+company:"Synthra Software",
+role:"Data Analyst Intern",
+department:"CSE,IT,AIDS",
+year:4,
+skills:"Excel,SQL,Power BI",
+location:"Chennai",
+paid:"Paid",
+cgpa:7.5,
+domain:"Data Analytics",
+benefits:"Stipend and pre-placement offer chance"
+},
+
+{
+company:"Tessera Technologies",
+role:"Full Stack Intern",
+department:"CSE,IT,AIDS",
+year:2,
+skills:"CSS,JavaScript,React",
+location:"Pune",
+paid:"Paid",
+cgpa:0,
+domain:"Web Development",
+benefits:"Stipend and project experience"
+},
+
+{
+company:"Kinetiq Technologies",
+role:"Web Developer Intern",
+department:"ANY",
+year:2,
+skills:"HTML,CSS,React",
+location:"Hyderabad",
+paid:"Unpaid",
+cgpa:0,
+domain:"Web Development",
+benefits:"Certificate and project experience"
+}
+
+];
+
+
+/* =========================================================
+   APPLICATION STATE
+========================================================= */
+
+let currentStudent = null;
+
+let currentResults = null;
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(){
+
+    const register =
+        document.getElementById("loginRegister")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    message.textContent = "";
+
+    if(!register || !password){
+
+        message.textContent =
+            "Enter register number and password.";
+
+        return;
+    }
+
+    const student =
+        students.find(function(s){
+
+            return (
+                s.registerNumber === register &&
+                s.password === password
+            );
+
+        });
+
+
+    if(!student){
+
+        message.textContent =
+            "Invalid register number or password.";
+
+        return;
+    }
+
+
+    currentStudent = student;
+
+    localStorage.setItem(
+        "internconnectStudent",
+        JSON.stringify(student)
+    );
+
+
+    showPage("profilePage");
+
+
+    document.getElementById(
+        "registerNumber"
+    ).value = student.registerNumber;
+
+
+    document.getElementById(
+        "welcome"
+    ).textContent =
+        "Welcome, " + student.fullName;
+
+}
+
+
+/* =========================================================
+   FIND INTERNSHIPS
+========================================================= */
+
+function findInternships(){
+
+    const department =
+        document.getElementById("department").value;
+
+    const year =
+        Number(document.getElementById("year").value);
+
+    const cgpa =
+        Number(document.getElementById("cgpa").value);
+
+    const skills =
+        document.getElementById("skills").value
+        .toLowerCase()
+        .split(",")
+        .map(function(skill){
+            return skill.trim();
+        })
+        .filter(Boolean);
+
+    const location =
+        document.getElementById("location").value;
+
+    const paid =
+        document.getElementById("paid").value;
+
+    const domain =
+        document.getElementById("domain").value;
+
+    const message =
+        document.getElementById("profileMessage");
+
+    message.textContent = "";
+
+
+    /* VALIDATION */
+
+    if(
+        Number.isNaN(cgpa) ||
+        cgpa < 0 ||
+        cgpa > 10
+    ){
+
+        message.textContent =
+            "CGPA must be between 0 and 10.";
+
+        return;
+    }
+
+
+    if(skills.length === 0){
+
+        message.textContent =
+            "Enter at least one skill.";
+
+        return;
+    }
+
+
+    const eligible = [];
+
+    const notEligible = [];
+
+
+    /* =====================================================
+       CHECK EVERY INTERNSHIP
+    ===================================================== */
+
+    internships.forEach(function(internship){
+
+        const reasons = [];
+
+
+        /* DEPARTMENT */
+
+        const departments =
+            internship.department
+            .split(",")
+            .map(function(d){
+                return d.trim();
+            });
+
+
+        if(
+            internship.department !== "ANY" &&
+            !departments.includes(department)
+        ){
+
+            reasons.push(
+                "Department mismatch"
+            );
+
+        }
+
+
+        /* YEAR */
+
+        if(year < internship.year){
+
+            reasons.push(
+                "Required year: " +
+                internship.year
+            );
+
+        }
+
+
+        /* CGPA */
+
+        if(
+            internship.cgpa > 0 &&
+            cgpa < internship.cgpa
+        ){
+
+            reasons.push(
+                "Minimum CGPA: " +
+                internship.cgpa
+            );
+
+        }
+
+
+        /* SKILLS */
+
+        const requiredSkills =
+            internship.skills
+            .toLowerCase()
+            .split(",")
+            .map(function(s){
+                return s.trim();
+            });
+
+
+        const matchedSkills =
+            requiredSkills.filter(function(required){
+
+                return skills.some(function(userSkill){
+
+                    return (
+                        userSkill === required ||
+                        userSkill.includes(required) ||
+                        required.includes(userSkill)
+                    );
+
+                });
+
+            });
+
+
+        if(matchedSkills.length === 0){
+
+            reasons.push(
+                "No matching skills"
+            );
+
+        }
+
+
+        /* LOCATION */
+
+        if(
+            location !== "Any" &&
+            internship.location !== location &&
+            internship.location !== "Remote"
+        ){
+
+            reasons.push(
+                "Location mismatch"
+            );
+
+        }
+
+
+        /* PAID */
+
+        if(
+            paid !== "Any" &&
+            internship.paid !== paid
+        ){
+
+            reasons.push(
+                "Payment preference mismatch"
+            );
+
+        }
+
+
+        /* DOMAIN */
+
+        if(
+            domain !== "Any" &&
+            internship.domain !== domain
+        ){
+
+            reasons.push(
+                "Domain mismatch"
+            );
+
+        }
+
+
+        /* RESULT */
+
+        if(reasons.length === 0){
+
+            eligible.push({
+
+                ...internship,
+
+                matchedSkills:
+                    matchedSkills.length
+
+            });
+
+        }
+        else{
+
+            notEligible.push({
+
+                ...internship,
+
+                reason:
+                    reasons.join("; ")
+
+            });
+
+        }
+
+    });
+
+
+    /* SORT BY BEST SKILL MATCH */
+
+    eligible.sort(function(a,b){
+
+        return (
+            b.matchedSkills -
+            a.matchedSkills
+        );
+
+    });
+
+
+    currentResults = {
+
+        eligible:
+            eligible,
+
+        notEligible:
+            notEligible
+
+    };
+
+
+    showResults();
+
+}
+
+
+/* =========================================================
+   DISPLAY RESULTS
+========================================================= */
+
+function showResults(){
+
+    showPage("resultPage");
+
+
+    const eligible =
+        currentResults.eligible;
+
+    const notEligible =
+        currentResults.notEligible;
+
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        internships.length;
+
+
+    document.getElementById(
+        "eligibleCount"
+    ).textContent =
+        eligible.length;
+
+
+    document.getElementById(
+        "notEligibleCount"
+    ).textContent =
+        notEligible.length;
+
+
+    document.getElementById(
+        "resultSummary"
+    ).textContent =
+
+        "Checked " +
+        internships.length +
+        " internships: " +
+        eligible.length +
+        " eligible and " +
+        notEligible.length +
+        " not eligible.";
+
+
+    /* ELIGIBLE TABLE */
+
+    const eligibleTable =
+        document.getElementById(
+            "eligibleTable"
+        );
+
+    eligibleTable.innerHTML = "";
+
+
+    if(eligible.length === 0){
+
+        eligibleTable.innerHTML =
+            `
+            <tr>
+                <td colspan="7"
+                    style="text-align:center;">
+                    No eligible internships found.
+                </td>
+            </tr>
+            `;
+
+    }
+    else{
+
+        eligible.forEach(function(item){
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    <b>${item.company}</b>
+                </td>
+
+                <td>
+                    ${item.role}
+                </td>
+
+                <td>
+                    ${item.location}
+                </td>
+
+                <td>
+
+                    <span class="badge ${
+                        item.paid === "Paid"
+                        ? "paid"
+                        : "unpaid"
+                    }">
+
+                        ${item.paid}
+
+                    </span>
+
+                </td>
+
+                <td>
+                    ${item.domain}
+                </td>
+
+                <td>
+
+                    <span class="badge match">
+
+                        ${item.matchedSkills}
+                        skill(s)
+
+                    </span>
+
+                </td>
+
+                <td>
+                    ${item.benefits}
+                </td>
+
+            `;
+
+
+            eligibleTable.appendChild(row);
+
+        });
+
+    }
+
+
+    /* NOT ELIGIBLE TABLE */
+
+    const notEligibleTable =
+        document.getElementById(
+            "notEligibleTable"
+        );
+
+    notEligibleTable.innerHTML = "";
+
+
+    if(notEligible.length === 0){
+
+        notEligibleTable.innerHTML =
+            `
+            <tr>
+                <td colspan="4"
+                    style="text-align:center;">
+                    All internships are eligible.
+                </td>
+            </tr>
+            `;
+
+    }
+    else{
+
+        notEligible.forEach(function(item){
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    <b>${item.company}</b>
+                </td>
+
+                <td>
+                    ${item.role}
+                </td>
+
+                <td>
+                    ${item.location}
+                </td>
+
+                <td>
+                    ${item.reason}
+                </td>
+
+            `;
+
+
+            notEligibleTable.appendChild(row);
+
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(pageId){
+
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("profilePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(pageId)
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   BACK TO PROFILE
+========================================================= */
+
+function backToProfile(){
+
+    showPage("profilePage");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+    currentStudent = null;
+
+    currentResults = null;
+
+    localStorage.removeItem(
+        "internconnectStudent"
+    );
+
+    document.getElementById(
+        "loginRegister"
+    ).value = "";
+
+    document.getElementById(
+        "loginPassword"
+    ).value = "";
+
+    showPage("loginPage");
+
+}
+
+
+/* =========================================================
+   RESTORE LOGIN
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const saved =
+            localStorage.getItem(
+                "internconnectStudent"
+            );
+
+
+        if(saved){
+
+            try{
+
+                currentStudent =
+                    JSON.parse(saved);
+
+
+                showPage("profilePage");
+
+
+                document.getElementById(
+                    "registerNumber"
+                ).value =
+                    currentStudent.registerNumber;
+
+
+                document.getElementById(
+                    "welcome"
+                ).textContent =
+                    "Welcome, " +
+                    currentStudent.fullName;
+
+            }
+            catch(error){
+
+                localStorage.removeItem(
+                    "internconnectStudent"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
